@@ -1,0 +1,59 @@
+{
+    "plants": {
+        "sanjivani": {
+            "name": "Sanjivani",
+            "description": "Sanjivani description",
+            "diseases": {
+                "lupus": true,
+                "alzheimer": true
+            },
+            "symptoms": {
+                "dolor-de-cabeza": true,
+                "cansancio": true
+            }
+        },
+        "salvia": {
+            "name": "Salvia",
+            "description": "Salvia description",
+            "diseases": {
+                "alzheimer": true
+            },
+            "symptoms": {
+                "cansancio": true
+            }
+        }
+    },
+    "symptoms": {
+        "dolor-de-cabeza": {
+            "name": "Dolor de cabeza",
+            "description": "Dolor de cabeza description",
+            "plants": {
+                "sanjivani": true
+            }
+        },
+        "cansancio": {
+            "name": "Dolor de cabeza",
+            "description": "Dolor de cabeza description",
+            "plants": {
+                "sanjivani": true
+            }
+        }
+    },
+    "diseases": {
+        "lupus": {
+            "name": "Lupus",
+            "description": "Lupus description",
+            "plants": {
+                "sanjivani": true
+            }
+        },
+        "alzheimer": {
+            "name": "Alzheimer",
+            "description": "Alzheimer description",
+            "plants": {
+                "sanjivani": true,
+                "salvia": true
+            }
+        }
+    }
+}
