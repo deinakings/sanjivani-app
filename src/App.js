@@ -1,41 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import firebase from './firebase-db';
-import MenuWrapper from './MenuWrapper';
+import { slide as Menu } from 'react-burger-menu';
+import List from './components/list/List.js';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      plants: []
+      menuOpen: false
     };
   }
-  componentWillMount(){
-    
-    /* Create reference to messages in Firebase Database */
-    let plantsRef = firebase.database().ref('plants').orderByKey().limitToLast(100);
-    console.log(plantsRef);
-    plantsRef.on('child_added', snapshot => {
-      
-      /* Update React state when message is added at Firebase Database */
-      let plant = { name: snapshot.val().name, id: snapshot.key };
-      this.setState({ plants: [plant].concat(this.state.plants) });
-    })
+
+  closeMenu() {
+    this.setState({menuOpen: false})
   }
   render() {
-    console.log(this.state.plants);
     return (
-      <div className="App">
-        <MenuWrapper></MenuWrapper>
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p> */}
-      </div>
+      <Router>
+        <div className="App">
+            <Menu isOpen={this.state.menuOpen}>
+              <ul>
+                <li onClick={() => this.closeMenu() }><Link className="menu-item" exact={"true"} to="/">Home</Link></li>
+                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/plantas">Plantas</Link></li>
+                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/enfermedades">Enfermedades</Link></li>
+                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/sintomas">Sintomas</Link></li>
+              </ul>
+            </Menu>
+            <Route path="/plantas" render={() => <List type={'plants'}></List>} />
+            <Route path="/enfermedades" render={() => <List type={'diseases'}></List>} />
+        </div>
+      </Router>
     );
   }
 }
