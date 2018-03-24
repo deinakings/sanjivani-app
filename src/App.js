@@ -17,7 +17,7 @@ class App extends Component {
   }
   render() {
     return (
-      <Router>
+      <Router basename="/sanjivani-app">
         <div className="App">
             <Menu isOpen={this.state.menuOpen}>
               <ul>

@@ -14,26 +14,23 @@ class List extends Component {
     };
   }
   componentWillMount(){
-    console.log('componentWillMount', this.props.type);
     /* Create reference in Firebase Database */
     let dataRef = firebase.database().ref(this.props.type).orderByKey().limitToLast(100);
     dataRef.on('child_added', snapshot => {
-      console.log('child_added', this.props.type, snapshot.val().name);
       /* Update React state when child is added at Firebase Database */
       let data = { name: snapshot.val().name, id: snapshot.key };
-      let newState = {};
-      debugger;
-      console.log(JSON.stringify(this.state[this.props.type]));
-      newState[this.props.type] = [data].concat(this.state[this.props.type]);
-      this.setState(newState);
-      console.log(JSON.stringify(this.state));
-      
+      /* send a function to state to not override the values
+       if we call it in the same update cycle */
+      this.setState((previousState, currentProps) => {
+        let newState = {};
+        newState[currentProps.type] = [data].concat(previousState[currentProps.type]);
+        return newState;
+      });
     })
   }
   render() {
-    console.log('render');
     return this.state[this.props.type].map((value, key) => {
-      return (<div>{value.name}</div>);
+      return (<div key={key + value}>{value.name}</div>);
     });
   }
 }
