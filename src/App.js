@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { slide as Menu } from 'react-burger-menu';
-import List from './components/list/List.js';
+import ListView from './components/listView/ListView.js';
+import Header from './components/header/Header.js';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class App extends Component {
@@ -27,8 +28,12 @@ class App extends Component {
                 <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/sintomas">Sintomas</Link></li>
               </ul>
             </Menu>
-            <Route path="/plantas" render={() => <List type={'plants'}></List>} />
-            <Route path="/enfermedades" render={() => <List type={'diseases'}></List>} />
+            <Header></Header>
+            <div className="content">
+              <Route path="/plantas" render={() => <ListView type={'plants'}></ListView>} />
+              <Route path="/enfermedades" render={() => <ListView type={'diseases'}></ListView>} />
+              <Route path="/sintomas" render={() => <ListView type={'symptoms'}></ListView>} />
+            </div>
         </div>
       </Router>
     );
