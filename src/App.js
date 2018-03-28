@@ -22,17 +22,15 @@ class App extends Component {
         <div className="App">
             <Menu isOpen={this.state.menuOpen}>
               <ul>
-                <li onClick={() => this.closeMenu() }><Link className="menu-item" exact={"true"} to="/">Home</Link></li>
-                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/plantas">Plantas</Link></li>
-                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/enfermedades">Enfermedades</Link></li>
-                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/sintomas">Sintomas</Link></li>
+                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/">Home</Link></li>
+                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/plants">Plantas</Link></li>
+                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/diseases">Enfermedades</Link></li>
+                <li onClick={() => this.closeMenu() }><Link className="menu-item" to="/symptoms">Sintomas</Link></li>
               </ul>
             </Menu>
             <Header></Header>
             <div className="content">
-              <Route path="/plantas" render={() => <ListView type={'plants'}></ListView>} />
-              <Route path="/enfermedades" render={() => <ListView type={'diseases'}></ListView>} />
-              <Route path="/sintomas" render={() => <ListView type={'symptoms'}></ListView>} />
+              <Route path="/:type" render={({match}) => <ListView type={match.params.type}></ListView>} />
             </div>
         </div>
       </Router>

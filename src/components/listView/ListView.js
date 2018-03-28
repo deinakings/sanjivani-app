@@ -11,7 +11,6 @@ class ListView extends Component {
     };
   }
   handleFilter(filter) {
-      console.log(filter);
     this.setState({filter: filter});
   }
   render() {
